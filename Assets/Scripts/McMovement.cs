@@ -14,6 +14,8 @@ public class McMovement : MonoBehaviour
     private Animator animator;
 
     private Vector2 moveInput;
+    private Vector2 lastMoveDir = Vector2.down; // Default idle facing down
+
     private bool isDashing = false;
     private bool canDash = true;
 
@@ -38,9 +40,15 @@ public class McMovement : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
         moveInput = new Vector2(moveX, moveY).normalized;
 
-        // 🎞️ ANIMATION VALUES
-        animator.SetFloat("MoveX", moveInput.x);
-        animator.SetFloat("MoveY", moveInput.y);
+        // Store last non-zero direction for idle
+        if (moveInput != Vector2.zero)
+        {
+            lastMoveDir = moveInput;
+        }
+
+        // 🎞️ Animator Parameters
+        animator.SetFloat("MoveX", lastMoveDir.x);
+        animator.SetFloat("MoveY", lastMoveDir.y);
         animator.SetFloat("Speed", moveInput.sqrMagnitude);
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && moveInput != Vector2.zero)
