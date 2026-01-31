@@ -3,22 +3,21 @@ using UnityEngine;
 public class SmoothCameraFollow : MonoBehaviour
 {
     public Transform target;
+    private Rigidbody2D targetRb;
 
-    [Header("Follow Settings")]
-    public float smoothTime = 0.15f;
-    public float catchUpSmoothTime = 0.2f;
-    private Vector3 velocity = Vector3.zero;
+    [Header("Follow")]
+    public float baseSmoothTime = 0.15f;
+    public float catchUpSmoothTime = 0.25f;
+    private Vector3 velocity;
 
     [Header("Dead Zone")]
     public Vector2 deadZoneSize = new Vector2(1.2f, 0.8f);
 
     [Header("Look Ahead")]
-    public float lookAheadDistance = 3f;
+    public float maxLookAheadDistance = 3f;
     public float lookAheadSmoothTime = 0.12f;
-
     private Vector3 currentLookAhead;
     private Vector3 lookAheadVelocity;
-    private Rigidbody2D targetRb;
 
     void Start()
     {
@@ -30,46 +29,42 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        Vector3 desiredPosition = transform.position;
+        Vector3 desiredPos = transform.position;
 
-        // 🎯 DEAD ZONE
+        // DEAD ZONE
         Vector3 toTarget = target.position - transform.position;
 
         if (Mathf.Abs(toTarget.x) > deadZoneSize.x)
-            desiredPosition.x = target.position.x - Mathf.Sign(toTarget.x) * deadZoneSize.x;
+            desiredPos.x = target.position.x - Mathf.Sign(toTarget.x) * deadZoneSize.x;
 
         if (Mathf.Abs(toTarget.y) > deadZoneSize.y)
-            desiredPosition.y = target.position.y - Mathf.Sign(toTarget.y) * deadZoneSize.y;
+            desiredPos.y = target.position.y - Mathf.Sign(toTarget.y) * deadZoneSize.y;
 
-        // 🚀 VELOCITY-BASED LOOK-AHEAD
-        Vector2 velocity2D = targetRb != null ? targetRb.linearVelocity : Vector2.zero;
+        // LOOK AHEAD
+        Vector2 vel = (targetRb != null) ? targetRb.linearVelocity : Vector2.zero;
+        Vector3 targetLookAhead = vel.normalized * maxLookAheadDistance;
 
-        Vector3 lookAheadTarget = Vector3.zero;
-
-        if (velocity2D.magnitude > 0.1f)
-        {
-            lookAheadTarget = (Vector3)(velocity2D.normalized * lookAheadDistance);
-        }
+        // Prevent backward drift — only look ahead when moving
+        if (vel.magnitude < 0.1f) targetLookAhead = Vector3.zero;
 
         currentLookAhead = Vector3.SmoothDamp(
             currentLookAhead,
-            lookAheadTarget,
+            targetLookAhead,
             ref lookAheadVelocity,
             lookAheadSmoothTime
         );
 
-        desiredPosition += currentLookAhead;
+        desiredPos += currentLookAhead;
 
-        // 🧲 SOFT CATCH-UP
-        float currentSmooth = velocity2D.magnitude < 0.1f ? catchUpSmoothTime : smoothTime;
-
-        desiredPosition.z = transform.position.z;
+        // APPLY SMOOTH DAMP
+        float smooth = vel.magnitude > 0.1f ? baseSmoothTime : catchUpSmoothTime;
+        desiredPos.z = transform.position.z;
 
         transform.position = Vector3.SmoothDamp(
             transform.position,
-            desiredPosition,
+            desiredPos,
             ref velocity,
-            currentSmooth
+            smooth
         );
     }
 }

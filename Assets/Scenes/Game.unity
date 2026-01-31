@@ -485,8 +485,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -330, y: 108.61}
-  m_SizeDelta: {x: 127.73, y: 112.4}
+  m_AnchoredPosition: {x: -360.08, y: 144.21}
+  m_SizeDelta: {x: 187.9, y: 183.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388844869
 MonoBehaviour:
@@ -642,7 +642,7 @@ Transform:
   m_GameObject: {fileID: 1549377023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6206, y: 2.0655, z: 0}
+  m_LocalPosition: {x: 0.11, y: -0.02, z: 0}
   m_LocalScale: {x: 3.8964531, y: 3.8760753, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -982,8 +982,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1243,11 +1243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmoothCameraFollow
   target: {fileID: 1549377026}
-  smoothTime: 0.1
-  catchUpSmoothTime: 0.15
-  deadZoneSize: {x: 1, y: 0.6}
-  lookAheadDistance: 0.578
-  lookAheadSmoothTime: 0.07
+  baseSmoothTime: 0.12
+  catchUpSmoothTime: 0.25
+  deadZoneSize: {x: 1.1, y: 0.7}
+  maxLookAheadDistance: 1.1
+  lookAheadSmoothTime: 0.12
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
