@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Tutorial Spirit
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   spiritName: 
-  portrait: {fileID: 0}
+  portrait: {fileID: 1337779132, guid: d2c6c38bbeb8dd645b2bb271fac866f1, type: 3}
   dialogueLines:
-  - Hello World!!!
-  - I am the almighty test spirit,  the first ever entity created by the almighty
-    creator
-  - you shall worship me you mere mortal
+  - Hello Player!!
+  - I am your swexy tutorial spirit,i shall introduce you to this world.
+  - Hehehehehehehehehee.......

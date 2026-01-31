@@ -18,10 +18,14 @@ public class TutorialIntroDialogue : MonoBehaviour
     public float hintFadeSpeed = 3f;
     public float hintBlinkSpeed = 2f;
 
+    [Header("Input")]
+    public float inputCooldown = 0.15f; // prevents spam
+
     private int currentLine = 0;
     private bool isTyping = false;
     private bool lineFinished = false;
     private bool introEnding = false;
+    private bool inputLocked = false;
 
     private string[] currentSegments;
     private int currentSegmentIndex = 0;
@@ -41,35 +45,30 @@ public class TutorialIntroDialogue : MonoBehaviour
 
     void Update()
     {
-        if (introEnding) return;
+        if (introEnding || inputLocked) return;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // If typing → instantly complete current segment
+            StartCoroutine(InputCooldown());
+
             if (isTyping)
             {
                 CompleteSegmentInstantly();
             }
             else if (lineFinished)
             {
-                ShowHint(false);
-                lineFinished = false;
-
-                currentSegmentIndex++;
-
-                if (currentSegmentIndex < currentSegments.Length)
-                {
-                    loreText.text += " ";
-                    StartTypingSegment(currentSegments[currentSegmentIndex]);
-                }
-                else
-                {
-                    NextLine();
-                }
+                ProceedDialogue();
             }
         }
 
         AnimateHint();
+    }
+
+    IEnumerator InputCooldown()
+    {
+        inputLocked = true;
+        yield return new WaitForSeconds(inputCooldown);
+        inputLocked = false;
     }
 
     void StartLine()
@@ -108,7 +107,6 @@ public class TutorialIntroDialogue : MonoBehaviour
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        // Add only the remaining part of this segment
         string fullSegment = currentSegments[currentSegmentIndex];
         if (!loreText.text.EndsWith(fullSegment))
             loreText.text += fullSegment.Substring(Mathf.Min(loreText.text.Length, fullSegment.Length));
@@ -116,6 +114,24 @@ public class TutorialIntroDialogue : MonoBehaviour
         isTyping = false;
         lineFinished = true;
         ShowHint(true);
+    }
+
+    void ProceedDialogue()
+    {
+        ShowHint(false);
+        lineFinished = false;
+
+        currentSegmentIndex++;
+
+        if (currentSegmentIndex < currentSegments.Length)
+        {
+            loreText.text += " ";
+            StartTypingSegment(currentSegments[currentSegmentIndex]);
+        }
+        else
+        {
+            NextLine();
+        }
     }
 
     void NextLine()
