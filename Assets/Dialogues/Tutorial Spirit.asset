@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a23eaeaec0f14446b1808a6c08b8461, type: 3}
-  m_Name: TestSpirit
+  m_Name: Tutorial Spirit
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   spiritName: 
-  portrait: {fileID: 1088099970, guid: 68f4f5db8ddea334cb1216c8af00ad12, type: 3}
+  portrait: {fileID: 0}
   dialogueLines:
   - Hello World!!!
   - I am the almighty test spirit,  the first ever entity created by the almighty
