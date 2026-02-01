@@ -15,7 +15,7 @@ MonoBehaviour:
   spiritName: Lily
   spiritPortrait: {fileID: -732865708, guid: 5848e7be21b40a247b0d6a9162812db3, type: 3}
   playerName: You
-  playerPortrait: {fileID: 1088099970, guid: 68f4f5db8ddea334cb1216c8af00ad12, type: 3}
+  playerPortrait: {fileID: 2012366420, guid: 7e634db7399fab44db524b718050f150, type: 3}
   dialogueLines:
   - 'P:Here... The bouquet. Have you received the freedom that you so dearly desired
     to? '

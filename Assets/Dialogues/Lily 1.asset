@@ -15,7 +15,7 @@ MonoBehaviour:
   spiritName: Lily
   spiritPortrait: {fileID: -1107541906, guid: edcf9715c049fd44bad8357631421061, type: 3}
   playerName: Wade
-  playerPortrait: {fileID: 1088099970, guid: 68f4f5db8ddea334cb1216c8af00ad12, type: 3}
+  playerPortrait: {fileID: 2012366420, guid: 7e634db7399fab44db524b718050f150, type: 3}
   dialogueLines:
   - "P:You don\u2019t belong to this place anymore."
   - "S:Belonging isn\u2019t about where you stand. It\u2019s about what still holds
