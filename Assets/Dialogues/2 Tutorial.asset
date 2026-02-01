@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a23eaeaec0f14446b1808a6c08b8461, type: 3}
-  m_Name: Tutorial Spirit
+  m_Name: 2 Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   spiritName: 
   portrait: {fileID: 1337779132, guid: d2c6c38bbeb8dd645b2bb271fac866f1, type: 3}
   dialogueLines:
-  - Hello Player!!
-  - I am your swexy tutorial spirit,i shall introduce you to this world.
-  - Hehehehehehehehehee.......
+  - Thank you kind man.
